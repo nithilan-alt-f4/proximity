@@ -11,6 +11,11 @@ COOKIES_PATH = "/tmp/cookies.txt"
 
 _raw_cookies = os.environ.get("YT_COOKIES")
 if _raw_cookies:
+    # Some env var input boxes flatten real newlines into literal "\n" text
+    # when you paste a multi-line file in. That silently breaks the Netscape
+    # cookie file format, so undo it if it looks like that happened.
+    if "\\n" in _raw_cookies and "\n" not in _raw_cookies:
+        _raw_cookies = _raw_cookies.replace("\\n", "\n")
     with open(COOKIES_PATH, "w") as f:
         f.write(_raw_cookies)
 
@@ -589,6 +594,24 @@ def download():
         "Content-Type": "application/octet-stream",
     }
     return Response(stream_with_context(generate()), headers=headers)
+
+
+@app.route("/api/debug-cookies")
+def debug_cookies():
+    if not os.path.exists(COOKIES_PATH):
+        return jsonify(loaded=False, reason="YT_COOKIES env var not set or file never written")
+    with open(COOKIES_PATH) as f:
+        content = f.read()
+    lines = [l for l in content.splitlines() if l.strip()]
+    header_ok = content.startswith("# Netscape") or content.startswith("# HTTP Cookie File")
+    youtube_lines = sum(1 for l in lines if "youtube.com" in l)
+    return jsonify(
+        loaded=True,
+        line_count=len(lines),
+        header_looks_valid=header_ok,
+        youtube_cookie_lines=youtube_lines,
+        first_line=lines[0] if lines else "",
+    )
 
 
 @app.route("/health")
