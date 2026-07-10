@@ -9,6 +9,11 @@ app = Flask(__name__)
 YTDLP = "yt-dlp"
 COOKIES_PATH = "/tmp/cookies.txt"
 
+_raw_cookies = os.environ.get("YT_COOKIES")
+if _raw_cookies:
+    with open(COOKIES_PATH, "w") as f:
+        f.write(_raw_cookies)
+
 
 def cookie_args():
     return ["--cookies", COOKIES_PATH] if os.path.exists(COOKIES_PATH) else []
