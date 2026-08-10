@@ -32,7 +32,7 @@ jobs:
           copy ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe ffmpeg.exe
 
       - name: Build exe
-        run: python -m PyInstaller --onefile --windowed --name proximity --add-binary "yt-dlp.exe;." --add-binary "ffmpeg.exe;." ytdl.py
+        run: python -m PyInstaller --onefile --windowed --name proximity --add-binary "yt-dlp.exe;." --add-binary "ffmpeg.exe;." app.py
 
       - name: Upload to release
         uses: softprops/action-gh-release@v2
@@ -63,7 +63,7 @@ jobs:
           python -m PyInstaller --onefile --windowed --name proximity \
             --add-binary "yt-dlp:." \
             --add-binary "ffmpeg:." \
-            ytdl.py
+            app.py
 
       - name: Upload to release
         uses: softprops/action-gh-release@v2
