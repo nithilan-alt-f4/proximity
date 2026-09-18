@@ -14,6 +14,9 @@ Download videos, music, and entire playlists from YouTube and YouTube Music — 
 - Playlist downloads (auto-organized into folders)
 - Live quality selection — fetches available resolutions before you download
 - Video preview (title, channel, duration) before committing
+- **Embedded metadata** — title, artist, album, cover art written into the file
+- **Synced lyrics** — time-synced `.lrc` files via lrclib.net (MP3 mode)
+- Download progress bar with percentage
 - Log output so you can see exactly what's happening
 - No account, no API key, no browser extension
 
@@ -53,8 +56,9 @@ python ytdl.py
 1. Paste a YouTube or YouTube Music URL into the input field
 2. Hit **look up** — Proximity fetches the title, channel, duration, and available qualities
 3. Pick your format (MP4 or MP3) and quality
-4. Choose where to save (defaults to a `downloads/` folder next to the script)
-5. Hit **↓ download**
+4. Toggle **embed metadata & cover art** (on by default) and **synced lyrics** (MP3 mode)
+5. Choose where to save (defaults to a `downloads/` folder next to the script)
+6. Hit **download**
 
 Playlist URLs are detected automatically and saved into a named subfolder.
 
@@ -65,8 +69,9 @@ Playlist URLs are detected automatically and saved into a named subfolder.
 | Dependency | Purpose |
 |------------|---------|
 | [yt-dlp](https://github.com/yt-dlp/yt-dlp) | Core downloading engine |
-| [ffmpeg](https://ffmpeg.org/) | Audio extraction, video merging |
+| [ffmpeg](https://ffmpeg.org/) | Audio extraction, video merging, metadata embedding |
 | [customtkinter](https://github.com/TomSchimansky/CustomTkinter) | GUI framework |
+| [lrclib.net](https://lrclib.net) | Synced lyrics API (no key needed) |
 
 ---
 
