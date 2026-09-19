@@ -46,7 +46,7 @@ Just run it — yt-dlp and ffmpeg are bundled.
 git clone https://github.com/nithilan-alt-f4/proximity
 cd proximity
 pip install customtkinter
-python ytdl.py
+python app.py
 ```
 
 ---
@@ -83,7 +83,7 @@ To build locally:
 
 ```bash
 pip install pyinstaller customtkinter
-pyinstaller --onefile --noconsole --name proximity ytdl.py
+pyinstaller --onefile --noconsole --name proximity app.py
 ```
 
 The bundled `yt-dlp` and `ffmpeg` binaries are included automatically if placed in the project root before building (handled by the CI workflow).
