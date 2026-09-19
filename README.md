@@ -2,7 +2,7 @@
 
 **YouTube downloader. MP4 or MP3. No browser, no account, no BS.**
 
-Download videos, music, and entire playlists from YouTube and YouTube Music — up to 4K video or 320kbps audio — through a clean desktop GUI.
+Download videos, music, and entire playlists from YouTube and YouTube Music up to 4K video or 320kbps audio through a clean desktop GUI.
 
 ---
 
@@ -12,10 +12,10 @@ Download videos, music, and entire playlists from YouTube and YouTube Music — 
 - MP3 extraction at 320 / 256 / 192 / 128 kbps
 - YouTube Music support
 - Playlist downloads (auto-organized into folders)
-- Live quality selection — fetches available resolutions before you download
+- Live quality selection fetches available resolutions before you download
 - Video preview (title, channel, duration) before committing
-- **Embedded metadata** — title, artist, album, cover art written into the file
-- **Synced lyrics** — time-synced `.lrc` files via lrclib.net (MP3 mode)
+- **Embedded metadata** title, artist, album, cover art written into the file
+- **Synced lyrics** time-synced `.lrc` files via lrclib.net (MP3 mode)
 - Download progress bar with percentage
 - Log output so you can see exactly what's happening
 - No account, no API key, no browser extension
@@ -24,7 +24,7 @@ Download videos, music, and entire playlists from YouTube and YouTube Music — 
 
 ## getting started
 
-### option 1 — download the app
+### option 1 download the app
 
 Grab the latest release from the [releases page](https://github.com/nithilan-alt-f4/proximity/releases/latest):
 
@@ -33,9 +33,9 @@ Grab the latest release from the [releases page](https://github.com/nithilan-alt
 | Windows  | `proximity.exe` |
 | macOS    | `proximity` |
 
-Just run it — yt-dlp and ffmpeg are bundled.
+Just run it yt-dlp and ffmpeg are bundled.
 
-### option 2 — run from source
+### option 2 run from source
 
 **requirements:**
 - Python 3.9+
@@ -54,7 +54,7 @@ python app.py
 ## usage
 
 1. Paste a YouTube or YouTube Music URL into the input field
-2. Hit **look up** — Proximity fetches the title, channel, duration, and available qualities
+2. Hit **look up** Proximity fetches the title, channel, duration, and available qualities
 3. Pick your format (MP4 or MP3) and quality
 4. Toggle **embed metadata & cover art** (on by default) and **synced lyrics** (MP3 mode)
 5. Choose where to save (defaults to a `downloads/` folder next to the script)
