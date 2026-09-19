@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>proximity. — download anything.</title>
+  <title>proximity. download anything.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
@@ -500,7 +500,6 @@
 <header>
   <div style="display:flex;align-items:center;">
     <a class="logo" href="#">proximity.</a>
-    <span class="logo-sub">signal // download control room</span>
   </div>
   <div class="header-right">
     <span class="clock" id="clock"></span>
@@ -519,17 +518,14 @@
     <div class="section-num">01 / acquisition bay</div>
     <h1>PASTE THE<br/>LINK.<br/><span class="red">GET THE<br/>FILE.</span></h1>
     <p class="hero-desc">
-      <strong style="color:var(--text);">proximity</strong> is a minimal desktop downloader that
-      takes a YouTube URL and hands back clean MP4 or MP3 &mdash;
-      up to 4K video or 320kbps audio &mdash; with playlist support,
-      live quality selection, embedded metadata, and synced lyrics.
+      <strong style="color:var(--text);">proximity</strong> : the yt to mp3/mp4 converter
       No account, no browser, no BS.
     </p>
     <div class="hero-specs">
       <strong>engine</strong> &middot; yt-dlp &times; ffmpeg<br/>
       <strong>gui</strong> &middot; customtkinter<br/>
       <strong>platform</strong> &middot; windows + macos<br/>
-      <strong>telemetry</strong> &middot; local only
+      <strong>telemetry</strong> &middot; local 
     </div>
   </div>
   <div class="hero-right">
@@ -566,18 +562,14 @@
     <div class="feat-val">.lrc</div>
     <div class="feat-label">synced lyrics</div>
   </div>
-  <div class="feat">
-    <div class="feat-val">id3</div>
-    <div class="feat-label">embedded metadata</div>
-  </div>
 </div>
 
 <!-- download section -->
 <section class="dl-section">
-  <div class="section-num">02 / acquire binary</div>
+  <div class="section-num">02 / install</div>
   <div class="dl-header">
     <span></span>
-    <a href="https://github.com/nithilan-alt-f4/proximity" target="_blank">direct download &mdash; no redirects</a>
+    <a href="https://github.com/nithilan-alt-f4/proximity" target="_blank">visit the github repo</a>
   </div>
   <div class="dl-grid">
 
@@ -589,7 +581,7 @@
       </div>
       <div class="dl-card-body">
         <p>
-          Classic setup &mdash; yt-dlp and ffmpeg bundled inside.
+          Classic setup  yt-dlp and ffmpeg bundled inside.
           Windows may flag the unsigned build: <strong>More info &rarr; Run anyway.</strong>
         </p>
         <a class="dl-btn" href="#" onclick="getDownload('windows');return false;">
@@ -608,12 +600,12 @@
       </div>
       <div class="dl-card-body">
         <p>
-          Universal binary &mdash; works on M-series and Intel Macs.
+          Universal binary  works on M-series and Intel Macs.
           Right-click &rarr; <strong>Open</strong> on first launch to bypass Gatekeeper.
         </p>
         <a class="dl-btn secondary" href="#" onclick="getDownload('mac');return false;">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09z"/></svg>
-          Download for Mac
+          Download for Mac(prolly wont work ngl)
         </a>
       </div>
     </div>
@@ -623,7 +615,7 @@
 
 <!-- footer -->
 <footer>
-  <span>proximity &mdash; powered by <a href="https://github.com/yt-dlp/yt-dlp" target="_blank">yt-dlp</a></span>
+  <span>proximity  powered by <a href="https://github.com/yt-dlp/yt-dlp" target="_blank">yt-dlp</a></span>
   <span><a href="https://github.com/nithilan-alt-f4/proximity" target="_blank">source</a> &middot; <a href="https://github.com/nithilan-alt-f4/proximity/blob/main/LICENSE" target="_blank">mit license</a></span>
 </footer>
 
@@ -668,7 +660,7 @@
     msg.style.color = 'var(--muted)';
     try {
       const res = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/releases/latest`);
-      if (!res.ok) throw new Error('no release found yet — check back soon');
+      if (!res.ok) throw new Error('no release found yet check back soon');
       const data = await res.json();
       const asset = data.assets.find(a =>
         platform === 'windows' ? a.name.endsWith('.exe') : a.name === 'proximity'
