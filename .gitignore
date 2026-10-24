@@ -1,0 +1,18 @@
+# build/runtime artifacts
+__pycache__/
+*.pyc
+downloads/
+build/
+dist/
+*.spec
+
+# bundled binaries (injected by CI)
+yt-dlp.exe
+yt-dlp
+ffmpeg.exe
+ffmpeg
+
+# generated release binaries
+proximity.exe
+proximity
+proximity.app

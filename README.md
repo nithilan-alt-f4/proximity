@@ -11,12 +11,15 @@ Download videos, music, and entire playlists from YouTube and YouTube Music — 
 - MP4 downloads up to 4K (via yt-dlp format selection)
 - MP3 extraction at 320 / 256 / 192 / 128 kbps
 - YouTube Music support
-- Playlist downloads (auto-organized into folders)
+- **Parallel downloads** — run 1–6 downloads at once (default 4), each with its own live progress bar, speed and ETA
+- **Paste multiple links** — separated by spaces, commas or newlines; each becomes its own queue entry
+- Multiple playlists downloading simultaneously
+- Playlist downloads — auto-organized into a folder named after the playlist, real song names, no `01 -` prefixes, no underscores
 - Live quality selection — fetches available resolutions before you download
-- Video preview (title, channel, duration) before committing
+- Video preview with thumbnail (title, channel, duration) before committing
 - **Embedded metadata** — title, artist, album, cover art written into the file
 - **Synced lyrics** — time-synced `.lrc` files via lrclib.net (MP3 mode)
-- Download progress bar with percentage
+- Saves to your **Downloads folder by default** (registry-aware on Windows, always browseable)
 - Log output so you can see exactly what's happening
 - No account, no API key, no browser extension
 
@@ -38,14 +41,14 @@ Just run it — yt-dlp and ffmpeg are bundled.
 ### option 2 — run from source
 
 **requirements:**
-- Python 3.9+
+- Python 3.10+
 - [yt-dlp](https://github.com/yt-dlp/yt-dlp) (on PATH or in the same folder)
 - [ffmpeg](https://ffmpeg.org/download.html) (required for MP3 and merged MP4)
 
 ```bash
 git clone https://github.com/nithilan-alt-f4/proximity
 cd proximity
-pip install customtkinter
+pip install -r requirements.txt
 python app.py
 ```
 
@@ -53,14 +56,15 @@ python app.py
 
 ## usage
 
-1. Paste a YouTube or YouTube Music URL into the input field
-2. Hit **look up** — Proximity fetches the title, channel, duration, and available qualities
+1. Paste a YouTube or YouTube Music URL (or a bunch of them at once)
+2. Hit **look up** — Proximity fetches the title, channel, duration, thumbnail and available qualities
 3. Pick your format (MP4 or MP3) and quality
 4. Toggle **embed metadata & cover art** (on by default) and **synced lyrics** (MP3 mode)
-5. Choose where to save (defaults to a `downloads/` folder next to the script)
-6. Hit **download**
+5. Set **downloads at once** (1–6) if you want more or less parallelism
+6. Choose where to save (defaults to your Downloads folder)
+7. Hit **download** — queue as many as you like, they run in parallel with per-item progress
 
-Playlist URLs are detected automatically and saved into a named subfolder.
+Playlist URLs are detected automatically and saved into a named subfolder. Keep pasting links — new downloads queue up while others are running.
 
 ---
 
@@ -77,12 +81,12 @@ Playlist URLs are detected automatically and saved into a named subfolder.
 
 ## building from source
 
-Binaries are built with PyInstaller via GitHub Actions on push to `main`.
+Binaries are built with PyInstaller via GitHub Actions when a release is created.
 
 To build locally:
 
 ```bash
-pip install pyinstaller customtkinter
+pip install pyinstaller
 pyinstaller --onefile --noconsole --name proximity app.py
 ```
 
@@ -92,4 +96,4 @@ The bundled `yt-dlp` and `ffmpeg` binaries are included automatically if placed 
 
 ## license
 
-MIT
+MIT — see [LICENSE](LICENSE).
