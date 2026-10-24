@@ -29,7 +29,7 @@ Download videos, music, and entire playlists from YouTube and YouTube Music — 
 
 ### option 1 — download the app
 
-Grab the latest release from the [releases page](https://github.com/nithilan-alt-f4/proximity/releases/latest):
+Grab the latest release from the [releases page](https://github.com/nithilan-manivannan/proximity/releases/latest):
 
 | Platform | File |
 |----------|------|
@@ -46,7 +46,7 @@ Just run it — yt-dlp and ffmpeg are bundled.
 - [ffmpeg](https://ffmpeg.org/download.html) (required for MP3 and merged MP4)
 
 ```bash
-git clone https://github.com/nithilan-alt-f4/proximity
+git clone https://github.com/nithilan-manivannan/proximity
 cd proximity
 pip install -r requirements.txt
 python app.py
