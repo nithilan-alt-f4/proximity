@@ -20,7 +20,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install customtkinter pyinstaller
+        run: pip install customtkinter Pillow pyinstaller
 
       - name: Download yt-dlp
         run: curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe -o yt-dlp.exe
@@ -50,7 +50,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install customtkinter pyinstaller
+        run: pip install customtkinter Pillow pyinstaller
 
       - name: Install ffmpeg and yt-dlp
         run: brew install ffmpeg yt-dlp
