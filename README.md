@@ -1,49 +1,44 @@
-# proximity.
+# proximity
 
-**YouTube downloader. MP4 or MP3. No browser, no account, no BS.**
+**YouTube downloader for Windows. MP4 or MP3, with parallel queueing, synced lyrics, and embedded artwork. No browser, no account, no API keys.**
 
-Download videos, music, and entire playlists from YouTube and YouTube Music — up to 4K video or 320kbps audio — through a clean desktop GUI.
+Drop in one or many YouTube or YouTube Music links, pick a format and quality, and proximity downloads them in parallel with per item progress. Playlists land in their own named folder with real track names. MP3 exports come with title, artist, album, and cover art embedded, plus an optional time synced `.lrc` lyric file saved alongside.
 
----
+## Features
 
-## features
+- **Parallel downloads**: run up to six downloads at once (default four), each with its own live progress bar, speed, and ETA. Keep pasting links while the queue drains.
+- **Multi link input**: paste several URLs in one go, separated by spaces, commas, or newlines. Each becomes its own queue entry.
+- **MP4 up to 4K**: format selection is delegated to yt-dlp, so every adaptive quality YouTube serves is available.
+- **MP3 extraction**: 320, 256, 192, or 128 kbps, produced with ffmpeg.
+- **Video preview**: before downloading, the app fetches title, channel, duration, thumbnail, and the list of available resolutions.
+- **Playlist handling**: playlist URLs are detected automatically and saved into a folder named after the playlist, with clean track names: no `01 -` prefixes and no underscore soup.
+- **Metadata and artwork**: toggled by default: title, artist, album, and cover art are written into the file by ffmpeg while it works.
+- **Synced lyrics**: fetches line by line `.lrc` pairs from the LRCLIB API in MP3 mode. No key needed.
+- **Smart save folder**: defaults to your real Downloads folder, read through the Windows registry so OneDrive redirections and custom locations are honored. Always overridable with a browse dialog.
+- **Log panel**: the raw yt-dlp and ffmpeg output is visible so nothing happens invisibly.
 
-- MP4 downloads up to 4K (via yt-dlp format selection)
-- MP3 extraction at 320 / 256 / 192 / 128 kbps
-- YouTube Music support
-- **Parallel downloads** — run 1–6 downloads at once (default 4), each with its own live progress bar, speed and ETA
-- **Paste multiple links** — separated by spaces, commas or newlines; each becomes its own queue entry
-- Multiple playlists downloading simultaneously
-- Playlist downloads — auto-organized into a folder named after the playlist, real song names, no `01 -` prefixes, no underscores
-- Live quality selection — fetches available resolutions before you download
-- Video preview with thumbnail (title, channel, duration) before committing
-- **Embedded metadata** — title, artist, album, cover art written into the file
-- **Synced lyrics** — time-synced `.lrc` files via lrclib.net (MP3 mode)
-- Saves to your **Downloads folder by default** (registry-aware on Windows, always browseable)
-- Log output so you can see exactly what's happening
-- No account, no API key, no browser extension
+## Usage
 
----
+1. Paste one or more YouTube or YouTube Music URLs.
+2. Press the lookup button. Proximity fetches the thumbnail, title, channel, duration, and available qualities.
+3. Pick MP4 or MP3 and the quality, decide whether to embed metadata, artwork, and synced lyrics.
+4. Choose how many downloads run at once (one through six).
+5. Set the save folder, or leave it at Downloads.
+6. Press download. The queue runs in parallel and accepts more links while it works.
 
-## getting started
+## Getting started
 
-### option 1 — download the app
+### Option 1, release build
 
-Grab the latest release from the [releases page](https://github.com/nithilan-manivannan/proximity/releases/latest):
+Grab the latest exe from the releases page. yt-dlp and ffmpeg ship inside it.
 
 | Platform | File |
-|----------|------|
-| Windows  | `proximity.exe` |
-| macOS    | `proximity` |
+|---|---|
+| Windows | `proximity.exe` |
 
-Just run it — yt-dlp and ffmpeg are bundled.
+### Option 2, run from source
 
-### option 2 — run from source
-
-**requirements:**
-- Python 3.10+
-- [yt-dlp](https://github.com/yt-dlp/yt-dlp) (on PATH or in the same folder)
-- [ffmpeg](https://ffmpeg.org/download.html) (required for MP3 and merged MP4)
+Requirements: Python 3.10+, yt-dlp on PATH (or sitting next to `app.py`), and ffmpeg (required for MP3 and merged MP4).
 
 ```bash
 git clone https://github.com/nithilan-manivannan/proximity
@@ -52,48 +47,47 @@ pip install -r requirements.txt
 python app.py
 ```
 
----
+## How it works
 
-## usage
+- The interface is CustomTkinter on dark mode, with a Pillow based thumbnail preview when Pillow is present. Everything degrades gracefully if Pillow is missing.
+- Behind the GUI, proximity shells out to `yt-dlp` for download logic and `ffmpeg` for audio extraction, merging, and metadata. Both are resolved at runtime in three places: the PyInstaller bundle directory, the project folder, then PATH.
+- URLs are cleaned before use: track parameters are stripped, youtu.be short links are normalized, and playlist links are routed into playlist mode.
+- Progress comes from yt-dlp's progress output then is fed into per item bars updated from worker threads via Tkinter's `after` scheduling.
+- Lyrics: the metadata clean title is matched against LRCLIB's public API; a matching pair saves as `track.lrc` next to the MP3.
+- Windows console flashes are suppressed for child processes, so the app stays quiet on screen and in the margins.
 
-1. Paste a YouTube or YouTube Music URL (or a bunch of them at once)
-2. Hit **look up** — Proximity fetches the title, channel, duration, thumbnail and available qualities
-3. Pick your format (MP4 or MP3) and quality
-4. Toggle **embed metadata & cover art** (on by default) and **synced lyrics** (MP3 mode)
-5. Set **downloads at once** (1–6) if you want more or less parallelism
-6. Choose where to save (defaults to your Downloads folder)
-7. Hit **download** — queue as many as you like, they run in parallel with per-item progress
+## Dependencies
 
-Playlist URLs are detected automatically and saved into a named subfolder. Keep pasting links — new downloads queue up while others are running.
+| Dependency | Role |
+|---|---|
+| [yt-dlp](https://github.com/yt-dlp/yt-dlp) | Core download engine |
+| [ffmpeg](https://ffmpeg.org/) | Audio extraction, merging, metadata writing |
+| [customtkinter](https://github.com/TomSchimansky/CustomTkinter) | Interface |
+| [Pillow](https://python-pillow.org/) | Thumbnail rendering (optional, recommended) |
+| [LRCLIB](https://lrclib.net/) | Synced lyrics, free and keyless |
 
----
+## Building from source
 
-## dependencies
+Release artifacts are built with PyInstaller through GitHub Actions whenever a release is created. The workflow bundles `yt-dlp.exe` and `ffmpeg.exe` into the exe automatically.
 
-| Dependency | Purpose |
-|------------|---------|
-| [yt-dlp](https://github.com/yt-dlp/yt-dlp) | Core downloading engine |
-| [ffmpeg](https://ffmpeg.org/) | Audio extraction, video merging, metadata embedding |
-| [customtkinter](https://github.com/TomSchimansky/CustomTkinter) | GUI framework |
-| [lrclib.net](https://lrclib.net) | Synced lyrics API (no key needed) |
-
----
-
-## building from source
-
-Binaries are built with PyInstaller via GitHub Actions when a release is created.
-
-To build locally:
+To build on your own machine:
 
 ```bash
 pip install pyinstaller
-pyinstaller --onefile --noconsole --name proximity app.py
+pyinstaller --onefile --noconsole --name proximity --add-binary "yt-dlp.exe;." --add-binary "ffmpeg.exe;." app.py
 ```
 
-The bundled `yt-dlp` and `ffmpeg` binaries are included automatically if placed in the project root before building (handled by the CI workflow).
+## Repository structure
 
----
+```
+proximity/
+├── app.py                # interface and downloader logic
+├── index.html            # landing page
+├── requirements.txt      # customtkinter, Pillow, yt-dlp
+├── LICENSE               # MIT
+└── .github/workflows/build.yml
+```
 
-## license
+## License
 
-MIT — see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE).
